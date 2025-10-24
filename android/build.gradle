@@ -8,52 +8,43 @@ buildscript {
         targetSdkVersion = 29
         supportLibVersion = "28.0.0"
     }
+
     repositories {
-       google()
+        google()
         mavenCentral()
-        jcenter()
+        jcenter() // alcune librerie vecchie ancora lo richiedono
         maven { url "https://jitpack.io" } // necessario per FingerprintIdentify
         mavenLocal()
     }
+
     dependencies {
         classpath("com.android.tools.build:gradle:3.4.1")
-        classpath "com.android.support:support-compat:28.0.0-alpha1"
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        classpath("com.android.support:support-compat:28.0.0-alpha1")
+        // NOTE: Le dipendenze delle app vanno nei build.gradle dei singoli moduli
     }
 }
 
 allprojects {
     repositories {
-		maven {
-			url "$rootDir/../node_modules/react-native-background-fetch/android/libs"
-		}
-        mavenLocal()
-        maven {
-            // All of React Native (JS, Obj-C sources, Android binaries) is installed from npm
-            url("$rootDir/../node_modules/react-native/android")
-        }
-        maven {
-            // Android JSC is installed from npm
-            url("$rootDir/../node_modules/jsc-android/dist")
-        }
+        maven { url "$rootDir/../node_modules/react-native-background-fetch/android/libs" }
+        maven { url "$rootDir/../node_modules/react-native/android" }
+        maven { url "$rootDir/../node_modules/jsc-android/dist" }
 
         google()
         mavenCentral()
         jcenter()
-        maven { url "https://jitpack.io" } // necessario per FingerprintIdentify
+        maven { url "https://jitpack.io" }
         mavenLocal()
     }
+
     subprojects {
-        afterEvaluate {
-            project ->
-                if (project.hasProperty("android")) {
-                    android {
-                        compileSdkVersion = rootProject.ext.compileSdkVersion
-                        buildToolsVersion = rootProject.ext.buildToolsVersion
-                    }
+        afterEvaluate { project ->
+            if (project.hasProperty("android")) {
+                android {
+                    compileSdkVersion rootProject.ext.compileSdkVersion
+                    buildToolsVersion rootProject.ext.buildToolsVersion
                 }
+            }
         }
     }
 }
