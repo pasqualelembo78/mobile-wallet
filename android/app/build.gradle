@@ -2,13 +2,8 @@ apply plugin: "com.android.application"
 
 import com.android.build.OutputFile
 
-// === DISATTIVA COMPLETAMENTE SENTRY ===
+// === DISATTIVA COMPLETAMENTE SENTRY PRIMA DI APPLICARE IL PLUGIN ===
 project.ext.sentryEnabled = false
-
-gradle.startParameter.excludedTaskNames += [
-    ":app:bundleReleaseJsAndAssets_SentryUpload",
-    ":app:processReleaseSentryProguardMappings"
-]
 
 // === REACT NATIVE CONFIG ===
 project.ext.react = [
@@ -20,8 +15,10 @@ project.ext.react = [
 // React Native build logic
 apply from: "../../node_modules/react-native/react.gradle"
 
-// ⚠️ Manteniamo il file ma Sentry è disattivato sopra
-apply from: "../../node_modules/@sentry/react-native/sentry.gradle"
+// ⚠️ Applica Sentry solo se abilitato
+if (project.ext.sentryEnabled) {
+    apply from: "../../node_modules/@sentry/react-native/sentry.gradle"
+}
 
 def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
