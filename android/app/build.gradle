@@ -210,7 +210,7 @@ android {
 }
 
 dependencies {
-    implementation project(':react-native-fingerprint-scanner')
+        implementation 'com.github.uccmawei:FingerprintIdentify:1.2.6'
     implementation project(':react-native-background-fetch')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
