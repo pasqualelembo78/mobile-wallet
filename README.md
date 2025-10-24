@@ -41,3 +41,5 @@ Then either run `yarn deploy-android`, or:
 
 
 NDK richiesto per questo fork: 17.2.4988734
+nel caso di link symlink interrotti: find /root/mobile/node_modules -type l ! -exec test -e {} \; -exec rm {} \;
+
