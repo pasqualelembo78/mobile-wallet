@@ -43,3 +43,12 @@ Then either run `yarn deploy-android`, or:
 NDK richiesto per questo fork: 17.2.4988734
 nel caso di link symlink interrotti: find /root/mobile/node_modules -type l ! -exec test -e {} \; -exec rm {} \;
 
+sudo apt update
+sudo apt install libtinfo5
+Se il pacchetto libtinfo5 non esiste (su versioni più recenti di Ubuntu) puoi creare un link simbolico da libtinfo.so.6:
+
+bash
+Copia codice
+sudo apt install libncurses5
+sudo ln -s /lib/x86_64-linux-gnu/libtinfo.so.6 /lib/x86_64-linux-gnu/libtinfo.so.5
+
