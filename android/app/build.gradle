@@ -63,13 +63,15 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
-        release {
-            if (project.hasProperty('MYAPP_RELEASE_STORE_FILE')) {
-                storeFile file(MYAPP_RELEASE_STORE_FILE)
-                storePassword MYAPP_RELEASE_STORE_PASSWORD
-                keyAlias MYAPP_RELEASE_KEY_ALIAS
-                keyPassword MYAPP_RELEASE_KEY_PASSWORD
-            }
+      
+    release {
+        // Qui aggiungi le righe seguenti
+        storeFile file("/root/mobile/android/app/release-keystore.jks")
+        storePassword "desy2011"
+        keyAlias "release"
+        keyPassword "desy2011"
+    
+
         }
     }
 
@@ -120,7 +122,9 @@ dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"
     implementation 'com.google.android.gms:play-services-safetynet:+'
-    implementation 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.support:multidex:2.0.1'
+    implementation "androidx.annotation:annotation:1.6.0" // <-- aggiunta
+
     apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
     if (enableHermes) {
@@ -131,7 +135,6 @@ dependencies {
         implementation jscFlavor
     }
 }
-
 // === BLOCCA TUTTI I TASK DI SENTRY (ULTERIORE SICUREZZA) ===
 tasks.whenTaskAdded { task ->
     if (task.name.toLowerCase().contains("sentry")) {
