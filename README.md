@@ -55,5 +55,8 @@ sudo apt install libncurses5
 sudo ln -s /lib/x86_64-linux-gnu/libtinfo.so.6 /lib/x86_64-linux-gnu/libtinfo.so.5
 
 per la compilazione meglio se fai: export NODE_OPTIONS=--openssl-legacy-provider
+oppure permanente: 
 
+echo 'export NODE_OPTIONS=--openssl-legacy-provider' >> ~/.bashrc
+source ~/.bashrc
 
