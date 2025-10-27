@@ -60,3 +60,5 @@ oppure permanente:
 echo 'export NODE_OPTIONS=--openssl-legacy-provider' >> ~/.bashrc
 source ~/.bashrc
 
+Occorre JAVA 8 di default!
+
