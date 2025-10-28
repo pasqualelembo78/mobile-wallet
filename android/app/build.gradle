@@ -63,15 +63,12 @@ android {
             keyAlias 'androiddebugkey'
             keyPassword 'android'
         }
-      
-    release {
-        // Qui aggiungi le righe seguenti
-        storeFile file("/root/mobile/android/app/release-keystore.jks")
-        storePassword "desy2011"
-        keyAlias "release"
-        keyPassword "desy2011"
-    
 
+        release {
+            storeFile file("/root/mobile/android/app/release-keystore.jks")
+            storePassword "desy2011"
+            keyAlias "release"
+            keyPassword "desy2011"
         }
     }
 
@@ -125,6 +122,11 @@ dependencies {
     implementation 'com.android.support:multidex:2.0.1'
     implementation "androidx.annotation:annotation:1.6.0" // <-- aggiunta
 
+    // Firebase (consigliato: usa BoM per gestire versioni)
+    implementation platform('com.google.firebase:firebase-bom:32.1.0')
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
+
     apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
     if (enableHermes) {
@@ -135,6 +137,7 @@ dependencies {
         implementation jscFlavor
     }
 }
+
 // === BLOCCA TUTTI I TASK DI SENTRY (ULTERIORE SICUREZZA) ===
 tasks.whenTaskAdded { task ->
     if (task.name.toLowerCase().contains("sentry")) {
@@ -151,3 +154,6 @@ task copyDownloadableDepsToLibs(type: Copy) {
 // React Native native modules
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle")
 applyNativeModulesAppBuildGradle(project)
+
+// Applica Google Services plugin per Firebase (deve essere l'ultimo apply plugin)
+apply plugin: 'com.google.gms.google-services'

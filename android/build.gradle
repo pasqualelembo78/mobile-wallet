@@ -20,7 +20,9 @@ buildscript {
     dependencies {
         classpath("com.android.tools.build:gradle:3.4.1")
         classpath("com.android.support:support-compat:28.0.0-alpha1")
-        // NOTE: Le dipendenze delle app vanno nei build.gradle dei singoli moduli
+
+        // Google Services plugin per Firebase
+        classpath("com.google.gms:google-services:4.2.0")
     }
 }
 
