@@ -31,13 +31,13 @@ const Config = new function() {
      * The amount of decimal places your coin has, e.g. TurtleCoin has two
      * decimals
      */
-    this.decimalPlaces = 2;
+    this.decimalPlaces = 5;
 
     /**
      * The address prefix your coin uses - you can find this in CryptoNoteConfig.h.
      * In TurtleCoin, this converts to TRTL
      */
-    this.addressPrefix = 3914525;
+    this.addressPrefix = 18511;
 
     /**
      * Request timeout for daemon operations in milliseconds

@@ -44,7 +44,9 @@ export class SeedComponent extends React.Component {
     }
 
     render() {
-        const split = this.props.seed.split(' ');
+        // Controllo sicuro per evitare crash se seed è undefined
+        const seed = this.props.seed || '';
+        const split = seed.split(' ');
         const lines = _.chunk(split, 5);
 
         return(
@@ -55,24 +57,14 @@ export class SeedComponent extends React.Component {
                     borderColor: this.props.borderColour,
                     padding: 10
                 }}>
-                    <TextFixedWidth {...this.props}>
-                        {lines[0].join(' ')}
-                    </TextFixedWidth>
-                    <TextFixedWidth {...this.props}>
-                        {lines[1].join(' ')}
-                    </TextFixedWidth>
-                    <TextFixedWidth {...this.props}>
-                        {lines[2].join(' ')}
-                    </TextFixedWidth>
-                    <TextFixedWidth {...this.props}>
-                        {lines[3].join(' ')}
-                    </TextFixedWidth>
-                    <TextFixedWidth {...this.props}>
-                        {lines[4].join(' ')}
-                    </TextFixedWidth>
+                    {lines.map((line, index) => (
+                        <TextFixedWidth key={index} {...this.props}>
+                            {line.join(' ')}
+                        </TextFixedWidth>
+                    ))}
                 </View>
                 <CopyButton
-                    data={this.props.seed}
+                    data={seed}
                     name='Seed'
                     {...this.props}
                 />
